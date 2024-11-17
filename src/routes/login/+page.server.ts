@@ -1,31 +1,38 @@
-import { fail, json, type Actions } from "@sveltejs/kit";
+import { fail, json, redirect, type Actions } from "@sveltejs/kit";
 import { pinata } from "$lib/server/pinata";
+
+import type { PageServerLoad } from './$types';
+
+export const load: PageServerLoad = async ({ cookies }) => {
+    cookies.delete('username', { path: '/' });
+    cookies.delete('group', { path: '/' });
+};
+
 
 export const actions: Actions = {
   default: async ({ request }) => {
     try {
       const formData = await request.formData();
-      const uploadedFile = (formData?.get('fileToUpload') as File);
+      const username = formData.get('username') as string;
+      const password = formData.get('password') as string;
+     
+      const userFiles = await pinata.files.list()
+        .metadata({
+          type: 'user_data',
+          username: username
+        });
 
-      if (!uploadedFile.name || uploadedFile.size === 0) {
-        return fail(400, {
-          error: true,
-          message: "You must provide a file to upload"
-        })
-      }
-
-      const upload = await pinata.upload.file(uploadedFile);
-      const url = await pinata.gateways.createSignedURL({
-        cid: upload.cid,
-        expires: 360
-      });
-      return { url, filename: uploadedFile.name, status: 200 };
-    } catch (error) {
+        return {
+          status: 200,
+          user: userFiles
+        };
+    }
+    catch (error) {
       console.log(error);
-      return json(
-        { error: "Internal Server Error" },
-        { status: 500 }
-      );
+      return fail(500, {
+        error: true,
+        message: "Internal Server Error"
+      })
     }
   }
 }

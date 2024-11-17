@@ -3,8 +3,6 @@ import { pinata } from "$lib/server/pinata";
 export const load = async () => {
 
     try {
-        console.log('smacking')
-        console.log(await pinata.files)
         // const files = await pinata.pin.list({
         //     status: 'pinned',
         //     pageLimit: 100,

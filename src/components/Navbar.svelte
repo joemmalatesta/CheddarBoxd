@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
+	export let username: string | undefined = undefined;
 </script>
 
 <nav class="w-full bg-amber-600/60 p-4">
@@ -11,10 +12,10 @@
 			Cheddarboxd
 		</a>
 		<a
-			href="/profile"
-			class="text-white hover:text-amber-600 {$page.url.pathname === '/profile' ? 'font-bold' : ''}"
+			href={username ? "/profile" : "/login"}
+			class="text-white hover:text-amber-600 {$page.url.pathname === (username ? '/profile' : '/login') ? 'font-bold' : ''}"
 		>
-			Profile
+			{username || 'Login'}
 		</a>
 	</div>
 </nav>
