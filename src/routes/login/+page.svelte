@@ -6,7 +6,7 @@
         return async ({ result }: { result: any }) => {
             console.log(result);
             if (result.status == 200) {
-                await goto('/profile');
+                goto('/profile', { invalidateAll: true });
             }
         };
     }
@@ -38,7 +38,7 @@
           id="password"
           name="password"
           required
-          class="p-2 w-full border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
+          class="p-2 bg-transparent w-full border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 
@@ -47,7 +47,7 @@
           type="submit"
           name="action"
           value="login"
-          class="flex-1 bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+          class="flex-1  bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
         >
           Login
         </button>

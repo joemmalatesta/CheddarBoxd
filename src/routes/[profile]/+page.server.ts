@@ -23,7 +23,6 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
 
     try {
         // Get group ID for the username
-        console.log("Getting group ID");
         const groupResponse = await pinata.groups.list().name(username);
         const group = groupResponse.groups.find(g => g.name.toLowerCase() === username.toLowerCase())?.id;
         if (!group) {
