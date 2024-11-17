@@ -24,49 +24,62 @@ export const load: PageServerLoad = async ({ params, cookies }) => {
     try {
         // Get group ID for the username
         const groupResponse = await pinata.groups.list().name(username);
+
         const group = groupResponse.groups.find(g => g.name.toLowerCase() === username.toLowerCase())?.id;
         if (!group) {
+            console.log('No group found for username:', username);
             throw redirect(404, '/404');
         }
-        // Fetch user data from Pinata using metadata
+
+        // Fetch user data with error handling
         const userDataFile = await pinata.files.list().group(group).name('userData');
-        const userData = await pinata.gateways.get(userDataFile.files[0].cid);
-        const user = userData.data as unknown as User;
-        if (!user) {
+        if (!userDataFile?.files?.length) {
+            console.log('No user data file found');
             throw redirect(303, '/login');
         }
 
-        // Fetch all posts from the group
-        const postsData = await pinata.files.list().group(group).name('post');
-        
-        // Transform posts data to include gateway URLs and metadata
-        const posts = await Promise.all(postsData.files.map(async post => {
-            const imageUrl = await pinata.gateways.createSignedURL({
-                cid: post.cid,
-                expires: 20000,
-                gateway: PUBLIC_GATEWAY_URL
-            });
+        try {
+            const userData = await pinata.gateways.get(userDataFile.files[0].cid);
+            const user = userData.data as unknown as User;
+            if (!user?.username) {
+                console.log('Invalid user data:', userData);
+                throw redirect(303, '/login');
+            }
 
+            // Fetch all posts from the group
+            const postsData = await pinata.files.list().group(group).name('post');
+            
+            // Transform posts data to include gateway URLs and metadata
+            const posts = await Promise.all(postsData.files.map(async post => {
+                const imageUrl = await pinata.gateways.createSignedURL({
+                    cid: post.cid,
+                    expires: 20000,
+                    gateway: PUBLIC_GATEWAY_URL
+                });
+
+                return {
+                    imageUrl,
+                    title: post.keyvalues.title,
+                    cheeseType: post.keyvalues.cheeseType,
+                    rating: post.keyvalues.rating,
+                    winePairing: post.keyvalues.winePairing,
+                    comment: post.keyvalues.comment,
+                    postedAt: post.created_at,
+                    postedBy: post.keyvalues.postedBy,
+                    postedByImg: post.keyvalues.postedByImg
+                };
+            }));
+
+           
             return {
-                imageUrl,
-                title: post.keyvalues.title,
-                cheeseType: post.keyvalues.cheeseType,
-                rating: post.keyvalues.rating,
-                winePairing: post.keyvalues.winePairing,
-                comment: post.keyvalues.comment,
-                postedAt: post.created_at,
-                postedBy: post.keyvalues.postedBy,
-                postedByImg: post.keyvalues.postedByImg
+                username: user.username,
+                profilePic: user.profilePic,
+                posts
             };
-        }));
-
-        console.log(posts);
-       
-        return {
-            username: user.username,
-            profilePic: user.profilePic,
-            posts
-        };
+        } catch (error) {
+            console.error('Error fetching user data from gateway:', error);
+            throw redirect(303, '/login');
+        }
     } catch (error) {
         console.error('Error fetching user data:', error);
         throw redirect(303, '/login');
@@ -99,7 +112,6 @@ export const actions = {
             })
         }
         const userDataFile = await pinata.files.list().group(group).name('userData');
-        console.log(userDataFile);
         const userData = await pinata.gateways.get(userDataFile.files[0].cid);
         const user = userData.data as unknown as User;
         if (!user) {
@@ -115,7 +127,6 @@ export const actions = {
                     title, cheeseType, rating, winePairing, comment, postedBy: user.username, postedByImg: user.profilePic
                 }
             });
-            console.log(upload);
 
             
             return {
@@ -132,8 +143,14 @@ export const actions = {
     },
 	logout: async ({ cookies }) => {
 		try {
-			cookies.delete('username', { path: '/' });
-			cookies.delete('group', { path: '/' });
+			cookies.delete('username', { 
+				path: '/',
+				sameSite: 'lax'
+			});
+			cookies.delete('group', { 
+				path: '/',
+				sameSite: 'lax'
+			});
 			throw redirect(303, '/login');
 		} catch (error) {
 			console.error('Error logging out:', error);

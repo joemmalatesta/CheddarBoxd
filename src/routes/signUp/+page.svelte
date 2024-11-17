@@ -3,7 +3,7 @@
 	import { enhance } from '$app/forms';
     import { goto } from '$app/navigation';
     // TODO: add more options
-    const profilePics: string[] = ["1.svg", "2.svg", "3.svg"];
+    const profilePics: string[] = ["1.svg", "2.svg", "3.svg", "4.svg"];
     let selectedPic: string = "1.svg";
 
     async function handleSubmit(event: any) {
@@ -51,7 +51,7 @@
           id="username"
           name="username"
           required
-          class="p-2 w-full bg-transparent border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
+          class="p-2 w-full bg-white/50 border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 
@@ -62,7 +62,7 @@
           id="password"
           name="password"
           required
-          class="p-2 w-full bg-transparent border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
+          class="p-2 w-full bg-white/50 border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 

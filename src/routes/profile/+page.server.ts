@@ -16,8 +16,10 @@ const pinata = new PinataSDK({
 });
 
 export const load: PageServerLoad = async ({ cookies }) => {
+    console.log('loading')
     const username = cookies.get('username');
     const group = cookies.get('group');
+    console.log(username, group);
     if (!username || !group) {
         throw redirect(303, '/login');
     }
@@ -55,7 +57,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
             };
         }));
 
-        console.log(posts);
        
         return {
             username: user.username,
@@ -94,7 +95,6 @@ export const actions = {
             })
         }
         const userDataFile = await pinata.files.list().group(group).name('userData');
-        console.log(userDataFile);
         const userData = await pinata.gateways.get(userDataFile.files[0].cid);
         const user = userData.data as unknown as User;
         if (!user) {
@@ -110,7 +110,6 @@ export const actions = {
                     title, cheeseType, rating, winePairing, comment, postedBy: user.username, postedByImg: user.profilePic
                 }
             });
-            console.log(upload);
 
             
             return {
@@ -127,8 +126,8 @@ export const actions = {
     },
 	logout: async ({ cookies }) => {
 		try {
-			cookies.delete('username', { path: '/' });
-			cookies.delete('group', { path: '/' });
+			cookies.delete('username', { path: '/', sameSite: 'lax' });
+			cookies.delete('group', { path: '/', sameSite: 'lax' });
 			throw redirect(303, '/login');
 		} catch (error) {
 			console.error('Error logging out:', error);

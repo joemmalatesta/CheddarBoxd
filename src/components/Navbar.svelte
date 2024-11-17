@@ -4,7 +4,7 @@
 </script>
 
 <nav class="w-full bg-amber-800/60 p-4">
-	<div class="container mx-auto px-4 flex max-w-xl items-center justify-between">
+	<div class="container mx-auto px-8 flex max-w-xl items-center justify-between">
 		<a
 			href="/"
 			class="text-white text-xl {$page.url.pathname === '/' ? 'font-bold' : ''}"

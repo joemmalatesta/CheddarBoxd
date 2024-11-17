@@ -15,7 +15,7 @@
 			await update();
 			uploading = false;
 			profileState = 0;
-			await invalidateAll();
+			await location.reload();
 		};
 	}
 	$: posts = posts;
@@ -24,26 +24,29 @@
 </script>
 
 <main class="min-h-screen bg-gradient-to-b from-amber-50 to-orange-100">
-	<div class="container mx-auto px-4 py-8">
-		<div class="mx-auto flex max-w-xl items-center justify-between">
-			<button 
+	<div class="container mx-auto px-6 py-5">
+		<div class="mx-auto flex max-w-xl px-8 items-center justify-between">
+			<div class="flex gap-5">
+				<button 
 				on:click={() => (profileState = 0)} 
-				class="w-1/3 py-2 text-amber-900 font-semibold hover:underline rounded-lg transition-colors {profileState == 0 ? 'underline' : ''}  underline-offset-4"
+				class=" py-2 text-amber-900 font-semibold hover:underline rounded-lg transition-colors {profileState == 0 ? 'underline' : ''}  underline-offset-4"
 			>
 				Your Posts
 			</button>
 			<button 
 				on:click={() => (profileState = 1)} 
-				class="w-1/3 py-2 text-amber-900 font-semibold hover:underline rounded-lg transition-colors {profileState == 1 ? 'underline' : ''}  underline-offset-4"
+				class=" py-2 text-amber-900 font-semibold hover:underline rounded-lg transition-colors {profileState == 1 ? 'underline' : ''}  underline-offset-4"
 			>
-				New Post
-			</button>
-			<form class="w-1/3" method="POST" action="?/logout">
+					New Post
+				</button>
+			</div>
+			<form class="" method="POST" action="?/logout">
 				<button 
 					type="submit"
-					class="w-full py-2 text-amber-900 font-semibold hover:underline rounded-lg transition-colors  underline-offset-4"
+					class="flex gap-2 hover:underline underline-offset-4 py-2 text-amber-900 font-semibold rounded-lg transition-colors  underline-offset-4"
 				>
-					Logout
+					<p>Logout</p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#78350f" viewBox="0 0 256 256"><path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path></svg>
 				</button>
 			</form>
 		</div>
@@ -97,6 +100,7 @@
 						name="rating"
 						min="1"
 						max="5"
+						step="0.5"
 						required
 						class="w-full rounded border p-2"
 					/>

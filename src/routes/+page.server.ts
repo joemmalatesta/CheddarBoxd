@@ -26,7 +26,6 @@ export const load = async () => {
                 postedByImg: post.keyvalues.postedByImg
             };
         }));
-        console.log(posts);
 
         return {
             posts

@@ -4,7 +4,6 @@
   
     async function handleSubmit(event: any) {
         return async ({ result }: { result: any }) => {
-            console.log(result);
             if (result.status == 200) {
                 goto('/profile', { invalidateAll: true });
             }

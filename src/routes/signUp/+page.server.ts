@@ -11,7 +11,6 @@ const pinata = new PinataSDK({
 
 export const actions = {
 	default: async ({ request, cookies }) => {
-		console.log('creating new user')
 		const formData = await request.formData();
 		const username = formData.get('username') as string;
 		const password = formData.get('password') as string;
@@ -54,9 +53,10 @@ export const actions = {
 				});
 
 			// Set user cookie
-			cookies.set('username', username, { path: '/' });
-            cookies.set('group', group.id, { path: '/' });
-            
+			cookies.set('username', username, { path: '/', sameSite: 'lax' });
+            cookies.set('group', group.id, { path: '/', sameSite: 'lax' });
+			
+			
             return {
                 user: {
                     username: userData.username,
