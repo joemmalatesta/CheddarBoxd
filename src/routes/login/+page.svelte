@@ -11,10 +11,10 @@
     }
   </script>
 
-<main class="min-h-screen bg-gradient-to-b pt-10 from-amber-50 to-orange-100">
+<main class="min-h-screen bg-gradient-to-b pt-6 from-amber-50 to-orange-100">
   <div class="w-full max-w-md mx-auto p-6">
     <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold text-amber-800">Welcome to Cheddarboxd</h1>
+      <h1 class="text-2xl font-bold text-amber-800">Login to Cheddarboxd</h1>
       <p class="text-gray-600">Please login or <a href="/signup" class="text-amber-600 hover:underline">create an account</a></p>
     </div>
 

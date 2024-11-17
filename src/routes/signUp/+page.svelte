@@ -17,10 +17,11 @@
     }
 </script>
 
-<main class="min-h-screen bg-gradient-to-b pt-10 from-amber-50 to-orange-100">
+<main class="min-h-screen bg-gradient-to-b pt-6 from-amber-50 to-orange-100">
 <div class="w-full max-w-md mx-auto p-6">
     <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold text-gray-800">Come get your cheese on</h1>
+      <h1 class="text-2xl font-bold text-amber-900">Come get your cheese on</h1>
+      <p class="text-gray-600">We're happy to have you</p>
     </div>
 
     <form method="POST" class="space-y-4" use:enhance={handleSubmit}>
@@ -53,7 +54,7 @@
           id="username"
           name="username"
           required
-          class="p-2 w-full bg-white/50 border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
+          class="p-2 w-full bg-transparent border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 
@@ -64,7 +65,7 @@
           id="password"
           name="password"
           required
-          class="p-2 w-full bg-white/50 border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
+          class="p-2 w-full bg-transparent border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 
