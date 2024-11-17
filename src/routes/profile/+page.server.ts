@@ -126,8 +126,8 @@ export const actions = {
     },
 	logout: async ({ cookies }) => {
 		try {
-			cookies.delete('username', { path: '/', sameSite: 'lax' });
-			cookies.delete('group', { path: '/', sameSite: 'lax' });
+			cookies.delete('username', { path: '/', sameSite: 'lax',secure: false });
+			cookies.delete('group', { path: '/', sameSite: 'lax',secure: false });
 			throw redirect(303, '/login');
 		} catch (error) {
 			console.error('Error logging out:', error);

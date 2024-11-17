@@ -53,15 +53,16 @@ export const actions = {
 				});
 
 			// Set user cookie
-			cookies.set('username', username, { path: '/', sameSite: 'lax' });
-            cookies.set('group', group.id, { path: '/', sameSite: 'lax' });
+			cookies.set('username', username, { path: '/', sameSite: 'lax',secure: false });
+            cookies.set('group', group.id, { path: '/', sameSite: 'lax',secure: false });
 			
 			
             return {
                 user: {
                     username: userData.username,
                     profilePic: userData.profilePic
-                }
+                },
+				group: group.id
             };
 		} catch (error) {
 			console.log('Error creating user:', error);

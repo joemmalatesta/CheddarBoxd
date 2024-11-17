@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ cookies }) => {
-    cookies.delete('username', { path: '/', sameSite: 'lax' });
-    cookies.delete('group', { path: '/', sameSite: 'lax' });
+    cookies.delete('username', { path: '/', sameSite: 'lax',secure: false });
+    cookies.delete('group', { path: '/', sameSite: 'lax',secure: false });
 };
 
 interface User {
@@ -50,8 +50,8 @@ export const actions: Actions = {
                 message: "Invalid password"
             });
         }
-        cookies.set('username', username, { path: '/', sameSite: 'lax' });
-        cookies.set('group', group, { path: '/', sameSite: 'lax' });
+        cookies.set('username', username, { path: '/', sameSite: 'lax', secure: false });
+        cookies.set('group', group, { path: '/', sameSite: 'lax', secure: false });
         return {
           status: 200,
           user: user

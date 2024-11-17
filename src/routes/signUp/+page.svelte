@@ -9,6 +9,8 @@
     async function handleSubmit(event: any) {
         return async ({ result }: { result: any }) => {
             if (result.status == 200) {
+                sessionStorage.setItem('username', result.data.username);
+                sessionStorage.setItem('group', result.data.group)
                 await goto('/profile', { invalidateAll: true });
             }
         };

@@ -145,11 +145,13 @@ export const actions = {
 		try {
 			cookies.delete('username', { 
 				path: '/',
-				sameSite: 'lax'
+				sameSite: 'lax',
+                secure: false
 			});
 			cookies.delete('group', { 
 				path: '/',
-				sameSite: 'lax'
+				sameSite: 'lax',
+                secure: false
 			});
 			throw redirect(303, '/login');
 		} catch (error) {
