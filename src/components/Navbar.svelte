@@ -3,17 +3,17 @@
 	export let username: string | undefined = undefined;
 </script>
 
-<nav class="w-full bg-amber-600/60 p-4">
-	<div class="mx-auto flex w-2/5 items-center justify-between">
+<nav class="w-full bg-amber-800/60 p-4">
+	<div class="container mx-auto px-4 flex max-w-xl items-center justify-between">
 		<a
 			href="/"
-			class="text-white hover:text-amber-600 {$page.url.pathname === '/' ? 'font-bold' : ''}"
+			class="text-white text-xl {$page.url.pathname === '/' ? 'font-bold' : ''}"
 		>
 			Cheddarboxd
 		</a>
 		<a
 			href={username ? "/profile" : "/login"}
-			class="text-white hover:text-amber-600 {$page.url.pathname === (username ? '/profile' : '/login') ? 'font-bold' : ''}"
+			class="text-white text-xl  {$page.url.pathname === (username ? '/profile' : '/login') ? 'font-bold' : ''}"
 		>
 			{username || 'Login'}
 		</a>

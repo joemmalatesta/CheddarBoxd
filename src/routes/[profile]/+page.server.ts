@@ -15,14 +15,20 @@ const pinata = new PinataSDK({
     pinataGateway: PUBLIC_GATEWAY_URL,
 });
 
-export const load: PageServerLoad = async ({ cookies }) => {
-    const username = cookies.get('username');
-    const group = cookies.get('group');
-    if (!username || !group) {
-        throw redirect(303, '/login');
+export const load: PageServerLoad = async ({ params, cookies }) => {
+    const username = params.profile;
+    if (!username) {
+        throw redirect(404, '/404');
     }
 
     try {
+        // Get group ID for the username
+        console.log("Getting group ID");
+        const groupResponse = await pinata.groups.list().name(username);
+        const group = groupResponse.groups.find(g => g.name.toLowerCase() === username.toLowerCase())?.id;
+        if (!group) {
+            throw redirect(404, '/404');
+        }
         // Fetch user data from Pinata using metadata
         const userDataFile = await pinata.files.list().group(group).name('userData');
         const userData = await pinata.gateways.get(userDataFile.files[0].cid);

@@ -10,3 +10,6 @@
 
 <Navbar username={data.username} />
 {@render children()}
+<div class="text-center pb-5 text-neutral-900/60 text-sm bg-orange-100">
+    Created by <a href="https://joemmalatesta.com" class="underline underline-offset-2 hover:underline-offset-4 transition-all">Joe Malatesta</a>
+</div>

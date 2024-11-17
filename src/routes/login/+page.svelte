@@ -12,9 +12,10 @@
     }
   </script>
 
-  <div class="w-full max-w-md mx-auto p-6 my-10 bg-white rounded-lg">
+<main class="min-h-screen bg-gradient-to-b pt-10 from-amber-50 to-orange-100">
+  <div class="w-full max-w-md mx-auto p-6">
     <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold text-gray-800">Welcome to Cheddarboxd</h1>
+      <h1 class="text-2xl font-bold text-amber-800">Welcome to Cheddarboxd</h1>
       <p class="text-gray-600">Please login or <a href="/signup" class="text-amber-600 hover:underline">create an account</a></p>
     </div>
 
@@ -26,7 +27,7 @@
           id="username"
           name="username"
           required
-          class="p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          class="p-2 w-full bg-transparent border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 
@@ -37,7 +38,7 @@
           id="password"
           name="password"
           required
-          class="p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          class="p-2 w-full border-b-2 border-amber-500/40 focus:border-amber-500 focus:outline-none"
         />
       </div>
 
@@ -53,6 +54,4 @@
       </div>
     </form>
   </div>
-
-  
-  
+</main> 

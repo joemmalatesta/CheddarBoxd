@@ -5,4 +5,7 @@ export interface Post {
 	rating: number;
 	winePairing?: string | undefined;
 	comment?: string | undefined;
+	postedAt: string;
+	postedBy: string;
+	postedByImg: string;
 }

@@ -6,7 +6,7 @@
   const emptyStars = 5 - Math.ceil(rating);
 </script>
 
-<div class="flex gap-0.5">
+<div class="flex gap-1">
   {#each Array(fullStars) as _}
     <img src="full-star.svg" alt="full star" class="w-10">
   {/each}
