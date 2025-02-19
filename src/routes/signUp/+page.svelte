@@ -5,12 +5,14 @@
     // TODO: add more options
     const profilePics: string[] = ["1.svg", "2.svg", "3.svg", "4.svg"];
     let selectedPic: string = "1.svg";
-
+    let loading = false;
     async function handleSubmit(event: any) {
+      loading = true;
         return async ({ result }: { result: any }) => {
             if (result.status == 200) {
                 sessionStorage.setItem('username', result.data.username);
                 sessionStorage.setItem('group', result.data.group)
+                loading = false;
                 await goto('/profile', { invalidateAll: true });
             }
         };
@@ -80,7 +82,7 @@
           value="login"
           class="flex-1 bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
         >
-          Sign Up
+          {loading ? "Creating account..." : "Sign Up"}
         </button>
       </div>
     </form>

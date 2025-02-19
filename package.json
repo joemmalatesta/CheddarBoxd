@@ -33,6 +33,7 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^5.6.2",
 		"@tailwindcss/typography": "^0.5.15",
 		"bcrypt": "^5.1.1",
 		"pinata": "^1.8.0"

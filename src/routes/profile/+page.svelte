@@ -57,7 +57,7 @@
 			<form class="" method="POST" action="?/logout">
 				<button 
 					type="submit"
-					class="flex gap-2 hover:underline underline-offset-4 py-2 text-amber-900 font-semibold rounded-lg transition-colors  underline-offset-4"
+					class="flex gap-2 hover:underline  py-2 text-amber-900 font-semibold rounded-lg transition-colors  underline-offset-4"
 				>
 					<p>Logout</p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#78350f" viewBox="0 0 256 256"><path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path></svg>
@@ -65,11 +65,15 @@
 			</form>
 		</div>
 		{#if profileState === 0}
-			{#each posts as post}
-				<div>
+			{#if posts.length === 0}
+				<p class="text-center text-sm text-gray-500">No posts yet. Create one!</p>
+			{:else}
+				{#each posts as post}
+					<div>
 					<TimelinePost {post} />
 				</div>
-			{/each}
+				{/each}
+			{/if}
 		{:else}
 			<form
 				method="POST"

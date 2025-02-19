@@ -30,14 +30,14 @@
 
 <div class="mx-auto my-5 max-w-lg overflow-hidden rounded-lg bg-white shadow-md">
 	<!-- User Info -->
-	{#if post.postedByImg && post.postedBy}
-		<div class="flex items-center justify-between p-4">
-			<a href={`/${post.postedBy}`} class="flex items-center gap-3">
-				<div class="flex h-10 w-10 items-center justify-center rounded-full">
+    {#if post.postedByImg && post.postedBy}
+		<div class="flex items-center justify-between p-3">
+			<a href={`/${post.postedBy}`} class="flex items-center gap-2">
+				<div class="flex h-8 w-8 items-center justify-center rounded-full">
 					<img
 						src={`profilePics/${post.postedByImg}`}
 						alt={post.postedBy}
-						class="flex items-center justify-center object-cover p-1.5"
+						class="flex items-center justify-center object-cover p-1"
 					/>
 				</div>
 				<span class="font-medium">{post.postedBy}</span>

@@ -1,10 +1,13 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
+    let loading = false;
   
     async function handleSubmit(event: any) {
+        loading = true;
         return async ({ result }: { result: any }) => {
             if (result.status == 200) {
+                loading = false;
                 goto('/profile', { invalidateAll: true });
             }
         };
@@ -14,7 +17,7 @@
 <main class="min-h-screen bg-gradient-to-b pt-6 from-amber-50 to-orange-100">
   <div class="w-full max-w-md mx-auto p-6">
     <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold text-amber-800">Login to Cheddarboxd</h1>
+      <h1 class="text-2xl font-bold text-amber-900">Login to Cheddarboxd</h1>
       <p class="text-gray-600">Please login or <a href="/signup" class="text-amber-600 hover:underline">create an account</a></p>
     </div>
 
@@ -48,7 +51,7 @@
           value="login"
           class="flex-1  bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
       </div>
     </form>
